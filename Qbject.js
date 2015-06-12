@@ -61,9 +61,17 @@
     $.fn.append = function(content) {
         var $content = $(content);
         this.forEach(function(a) {
-            a.appendChild($content[0]);
+            a.appendChild($content.clone()[0]);
         });
         return this;
+    };
+    $.fn.clone = function(content) {
+        var result = $();
+        this.forEach(function(a) {
+            console.log($(a).html());
+            result.push($(a).html());
+        });
+        return result;
     };
 })(window);
 
