@@ -33,7 +33,7 @@
   $.fn.clone = function(content) {
     var result = $();
     this.forEach(function(a) {
-      result.push($(a).html());
+      result = result.add($(a).html());
     });
     return result;
   };

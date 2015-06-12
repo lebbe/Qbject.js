@@ -68,8 +68,7 @@
     $.fn.clone = function(content) {
         var result = $();
         this.forEach(function(a) {
-            console.log($(a).html());
-            result.push($(a).html());
+            result = result.add($(a).html());
         });
         return result;
     };
