@@ -47,6 +47,20 @@
 })(this);
 
 (function(window, undefined) {
+    function addRemoveClasses($items, classes, addRemove) {
+        classes && $items.forEach(function(node, i) {
+            (typeof classes === "function" ? classes.bind(node)(i, node.className) : classes).trim().split(/\s+/).forEach(function(styleClass) {
+                node.classList[addRemove](styleClass);
+            });
+        });
+        return $items;
+    }
+    $.fn.addClass = function(classes) {
+        return addRemoveClasses(this, classes, "add");
+    };
+    $.fn.removeClass = function(classes) {
+        return addRemoveClasses(this, classes, "remove");
+    };
     $.fn.html = function(html) {
         if (html) {
             this.forEach(function(a) {
