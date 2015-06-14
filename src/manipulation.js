@@ -17,11 +17,32 @@
 
   $.fn.addClass = function(classes) {
     return addRemoveClasses(this, classes, 'add');
-  }
+  };
 
   $.fn.removeClass = function(classes) {
     return addRemoveClasses(this, classes, 'remove');
-  }
+  };
+
+  $.fn.hasClass = function(className) {
+    for(var i = 0; i < this.length; i++)
+      if(this[i].classList.contains(className))
+        return true;
+    return false;
+  };
+
+  $.fn.toggleClass = function(classes, swizz) {
+    if(!classes) return;
+    this.forEach(function(node, i) {
+      var $node = $(node);
+      classes.trim().split(/\s+/).forEach(function(styleClass) {
+        if($node.hasClass(styleClass))
+          $node.removeClass(styleClass);
+        else
+          $node.addClass(styleClass);
+      });
+    });
+    return this;
+  };
 
   /**
    * Without argument: Return html representation of first
