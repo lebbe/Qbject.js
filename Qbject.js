@@ -57,7 +57,6 @@
     }
     function findClasses(classes, node, i) {
         return typeof classes === "function" ? classes.bind(node)(i, node.className) : classes;
-        3;
     }
     $.fn.addClass = function(classes) {
         return addRemoveClasses(this, classes, "add");
