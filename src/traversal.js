@@ -1,6 +1,6 @@
 
 
-(function(window, undefined) {
+(function() {
   var ap = Array.prototype;
   /* Run f on each element. */
   $.fn.each = function(f) {
@@ -26,4 +26,4 @@
     });
     return result;
   }
-})(this);
+})();

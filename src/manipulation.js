@@ -1,6 +1,6 @@
 
 
-(function(window, undefined) {
+(function() {
 
   // Minification helpers
   var add = 'add';
@@ -73,4 +73,4 @@
     });
     return result;
   };
-})(window);
+})();

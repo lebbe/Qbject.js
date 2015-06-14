@@ -46,7 +46,7 @@
     };
 })(this);
 
-(function(window, undefined) {
+(function() {
     var add = "add";
     var remove = "remove";
     function addRemoveClasses($items, classes, addRemove, toggle) {
@@ -100,9 +100,9 @@
         });
         return result;
     };
-})(window);
+})();
 
-(function(window, undefined) {
+(function() {
     var ap = Array.prototype;
     $.fn.each = function(f) {
         this.forEach(function(element, index, array) {
@@ -120,4 +120,4 @@
         });
         return result;
     };
-})(this);
+})();
