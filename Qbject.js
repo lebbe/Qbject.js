@@ -47,37 +47,33 @@
 })(this);
 
 (function(window, undefined) {
-    function addRemoveClasses($items, classes, addRemove) {
+    var add = "add";
+    var remove = "remove";
+    function addRemoveClasses($items, classes, addRemove, toggle) {
         classes && $items.forEach(function(node, i) {
-            findClasses(classes, node, i).trim().split(/\s+/).forEach(function(styleClass) {
-                node.classList[addRemove](styleClass);
+            (typeof classes === "function" ? classes.bind(node)(i, node.className) : classes).trim().split(/\s+/).forEach(function(styleClass) {
+                var classList = node.classList;
+                if (toggle) {
+                    if (classList.contains(styleClass)) classList[remove](styleClass); else classList[add](styleClass);
+                } else {
+                    classList[addRemove](styleClass);
+                }
             });
         });
         return $items;
     }
-    function findClasses(classes, node, i) {
-        return typeof classes === "function" ? classes.bind(node)(i, node.className) : classes;
-    }
     $.fn.addClass = function(classes) {
-        return addRemoveClasses(this, classes, "add");
+        return addRemoveClasses(this, classes, add);
     };
     $.fn.removeClass = function(classes) {
-        return addRemoveClasses(this, classes, "remove");
+        return addRemoveClasses(this, classes, remove);
     };
     $.fn.hasClass = function(className) {
         for (var i = 0; i < this.length; i++) if (this[i].classList.contains(className)) return true;
         return false;
     };
     $.fn.toggleClass = function(classes, swizz) {
-        if (swizz !== undefined) return addRemoveClasses(this, classes, swizz ? "add" : "remove");
-        if (!classes) return;
-        this.forEach(function(node, i) {
-            var $node = $(node);
-            findClasses(classes, node, i).trim().split(/\s+/).forEach(function(styleClass) {
-                if ($node.hasClass(styleClass)) $node.removeClass(styleClass); else $node.addClass(styleClass);
-            });
-        });
-        return this;
+        return addRemoveClasses(this, classes, swizz ? add : remove, swizz === undefined);
     };
     $.fn.html = function(html) {
         if (html) {
