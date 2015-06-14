@@ -5,14 +5,18 @@
   function addRemoveClasses($items, classes, addRemove) {
     classes && $items.forEach(function(node, i) {
 
-      ((typeof classes === 'function') ?
-       classes.bind(node)(i, node.className) :
-       classes)
+      findClasses(classes, node, i)
         .trim().split(/\s+/).forEach(function(styleClass) {  
           node.classList[addRemove](styleClass);
         });
     });
     return $items;
+  }
+
+  function findClasses(classes, node, i) {
+    return ((typeof classes === 'function') ?
+       classes.bind(node)(i, node.className) :
+       classes);3
   }
 
   $.fn.addClass = function(classes) {
@@ -31,15 +35,18 @@
   };
 
   $.fn.toggleClass = function(classes, swizz) {
+    if(swizz !== undefined)
+      return addRemoveClasses(this, classes, swizz ? 'add' : 'remove');
     if(!classes) return;
     this.forEach(function(node, i) {
       var $node = $(node);
-      classes.trim().split(/\s+/).forEach(function(styleClass) {
-        if($node.hasClass(styleClass))
-          $node.removeClass(styleClass);
-        else
-          $node.addClass(styleClass);
-      });
+      findClasses(classes, node, i)
+        .trim().split(/\s+/).forEach(function(styleClass) {
+          if($node.hasClass(styleClass))
+            $node.removeClass(styleClass);
+          else
+            $node.addClass(styleClass);
+        });
     });
     return this;
   };
