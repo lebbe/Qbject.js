@@ -22,6 +22,7 @@ Run the function at DOM ready.
 .toggleClass(classes, switch)
 .html([html])
 .append([html|selector|$object])
+.appendTo(target)
 .clone()
 
 .each(fn)
@@ -29,5 +30,5 @@ Run the function at DOM ready.
 .find(selector)
 
 
-Minified gzipped file takes currently 844 bytes.
+Minified gzipped file takes currently 876 bytes.
 

@@ -93,6 +93,18 @@
         });
         return this;
     };
+    $.fn.appendTo = function(target) {
+        target = $(target);
+        this.forEach(function(nodeFrom) {
+            if (target.length === 1) {
+                target[0].appendChild(nodeFrom);
+            } else {
+                target.forEach(function(nodeTarget) {
+                    nodeTarget.appendChild($(nodeFrom).clone()[0]);
+                });
+            }
+        });
+    };
     $.fn.clone = function(content) {
         var result = $();
         this.forEach(function(a) {
