@@ -26,4 +26,14 @@
     });
     return result;
   }
+
+  $.fn.is = function(selector) {
+    for(var i = 0; i < this.length; i++) {
+      var candidates = this[i].parentNode.querySelectorAll(selector);
+      for(var j = 0; j < candidates.length; j++)
+        if(candidates[j] === this[i])
+          return true;
+    }
+    return false;
+  };
 })();
