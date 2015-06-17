@@ -2,7 +2,7 @@
 
 (function() {
   var ap = Array.prototype;
-  /* Run f on each element. */
+
   $.fn.each = function(f) {
     this.forEach(function(element, index, array) {
       f.call(element, index, element);
@@ -10,14 +10,19 @@
     return this;
   }
   
-  /**
-   * Returns a new Qbject with the current nodes plus the new nodes.
-   */
   $.fn.add = function (selector) {
     return new $(ap.concat(
       ap.slice.call(this),
       ap.slice.call($(selector))));
   }
+
+  $.fn.children = function() {
+    var result = $();
+    this.forEach(function(node) {
+      result = result.add(new $(node.children));
+    });
+    return result;
+  };
   
   $.fn.find = function(selector) {
     var result = $();
