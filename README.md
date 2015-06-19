@@ -28,7 +28,8 @@ Run the function at DOM ready.
 .each(fn)
 .add(selector)
 .find(selector)
-
+.children()
+.parent()
 
 Minified gzipped file takes currently 876 bytes.
 
